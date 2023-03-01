@@ -11,9 +11,36 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        getDetail()
     }
 
-
+    func getPopularMovies() {
+        Networking.request(router: MovieRouter.popular) { (response: PopularResponseModel?, errorString) in
+            
+            guard let response = response else { return }
+            
+            print("iiiiii......\(response)")
+            
+        } onFailure: { (errorString, errorType) in
+            guard let error = errorString else { return }
+            
+            print(error)
+        }
+    }
+    
+    func getDetail() {
+        Networking.request(router: MovieRouter.detail(646389)) { (response: DetailResponseModel?, errorString) in
+            
+            guard let response = response else { return }
+            
+            print("iiiiii......\(response)")
+            
+        } onFailure: { (errorString, errorType) in
+            guard let error = errorString else { return }
+            
+            print(error)
+        }
+    }
 }
 
